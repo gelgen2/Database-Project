@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS TAXI
 (Taxi_ID VARCHAR(15),
 numSeats INT NOT NULL,
 PRIMARY KEY (Taxi_ID),
-FOREIGN KEY(Taxi_ID) REFERENCES VEHICLE(Vehicle_ID));
+FOREIGN KEY(Taxi_ID) REFERENCES VEHICLE(Vehicle_ID) on delete cascade);
 
 CREATE TABLE IF NOT EXISTS REQUEST
 (transport_ID VARCHAR(15),
@@ -30,7 +30,7 @@ Route_Num INT NOT NULL,
 Driver_ID varchar(15) NOT NULL,
 V_ID varchar(15) NOT NULL,
 PRIMARY KEY (V_ID, Current_Stop),
-FOREIGN KEY(V_ID) REFERENCES VEHICLE(Vehicle_ID),
+FOREIGN KEY(V_ID) REFERENCES VEHICLE(Vehicle_ID) on delete cascade,
 FOREIGN KEY(Station_Num) REFERENCES STATION(Station_no),
 FOREIGN KEY(Route_Num) REFERENCES ROUTE(Route_no),
 FOREIGN KEY(Driver_ID) REFERENCES DRIVER(emp_id));
@@ -44,7 +44,7 @@ No_Seats INT NOT NULL,
 Drive_ID varchar(15) NOT NULL,
 Bus_ID varchar(15) NOT NULL,
 PRIMARY KEY (Bus_ID),
-FOREIGN KEY(Bus_ID) REFERENCES VEHICLE(Vehicle_ID),
+FOREIGN KEY(Bus_ID) REFERENCES VEHICLE(Vehicle_ID) on delete cascade,
 FOREIGN KEY(Fare) REFERENCES FARE(Amount),
 FOREIGN KEY(Drive_ID) REFERENCES DRIVER(emp_id));
 
@@ -98,7 +98,11 @@ Fname varchar(15) NOT NULL,
 Lname varchar(15) NOT NULL,
 Wage DECIMAL(10,2) NOT NULL,
 Address varchar(30) NOT NULL,
-PRIMARY KEY (Employee_ID));
+Sup_ID varchar(15) NOT NULL,
+Station_ID varchar(15) NOT NULL,
+PRIMARY KEY (Employee_ID),
+FOREIGN KEY (Station_ID) REFERENCES STATION(Station_no),
+FOREIGN KEY(Sup_ID) REFERENCES EMPLOYEE(Employee_ID));
 
 
 CREATE TABLE IF NOT EXISTS DRIVER
@@ -107,19 +111,19 @@ bus_num varchar(15) NOT NULL,
 emp_id varchar(15) NOT NULL,
 PRIMARY KEY (emp_id),
 FOREIGN KEY(bus_num) REFERENCES PUBLIC_BUS(V_ID),
-FOREIGN KEY(emp_id) REFERENCES EMPLOYEE(Employee_ID));
+FOREIGN KEY(emp_id) REFERENCES EMPLOYEE(Employee_ID) on delete cascade);
 
 CREATE TABLE IF NOT EXISTS MECHANIC
 (Work_On varchar(15) NOT NULL,
 mech_num varchar(15) NOT NULL,
 PRIMARY KEY (mech_num),
-FOREIGN KEY(mech_num) REFERENCES EMPLOYEE(Employee_ID));
+FOREIGN KEY(mech_num) REFERENCES EMPLOYEE(Employee_ID) on delete cascade);
 
 CREATE TABLE IF NOT EXISTS JANITOR
 (Station_num varchar(15) NOT NULL,
 jan_id varchar(15) NOT NULL,
 PRIMARY KEY (jan_id),
-FOREIGN KEY(jan_id) REFERENCES EMPLOYEE(Employee_ID),
+FOREIGN KEY(jan_id) REFERENCES EMPLOYEE(Employee_ID) on delete cascade,
 FOREIGN KEY(Station_num) REFERENCES STATION(Station_no));
 
 CREATE TABLE IF NOT EXISTS CASHIER
@@ -132,7 +136,7 @@ CREATE TABLE IF NOT EXISTS HR
 (No_complaints INT NOT NULL,
 hr_id varchar(15) NOT NULL,
 PRIMARY KEY (hr_id),
-FOREIGN KEY(hr_id) REFERENCES EMPLOYEE(Employee_ID));
+FOREIGN KEY(hr_id) REFERENCES EMPLOYEE(Employee_ID) on delete cascade);
 
 
 CREATE TABLE IF NOT EXISTS SUPERVISER
@@ -141,7 +145,7 @@ station_id varchar(15) NOT NULL,
 No_supervised INT NOT NULL,
 PRIMARY KEY (super_num),
 FOREIGN KEY(station_id) REFERENCES STATION(Station_no),
-FOREIGN KEY(super_num) REFERENCES EMPLOYEE(Employee_ID));
+FOREIGN KEY(super_num) REFERENCES EMPLOYEE(Employee_ID) on delete cascade);
 
 
 CREATE TABLE IF NOT EXISTS REPAIR_LOG
