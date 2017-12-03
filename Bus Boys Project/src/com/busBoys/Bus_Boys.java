@@ -26,7 +26,6 @@ public class Bus_Boys {
     private JButton butSupHome;
     private JButton butConHome;
     private JButton butAdmHome;
-    private JButton PLACEHOLDERButton;
     private JButton butHomeLogin;
     private JButton butHomeRoutes;
     private JButton butHomeRequests;
@@ -36,9 +35,37 @@ public class Bus_Boys {
     private JLabel lblPassword;
     private JTextField fldUsername;
     private JPasswordField fldPassword;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton butLoginEmployee;
+    private JButton butLoginAdmin;
+    private JButton butLoginSupervisor;
+    private JLabel lblSubmit;
+    private JTextField txtStationNumberSupervised;
+    private JTextField txtStationNameSupervised;
+    private JTextField txtNumberOfEmployeesSupervised;
+    private JLabel lblStationNumberSupervised;
+    private JLabel lblStationNameSupervised;
+    private JLabel lblNumberOfEmployeesSupervised;
+    private JButton butSupViewBuses;
+    private JLabel lblSupViewEmployees;
+    private JButton butSupViewDrivers;
+    private JButton butSupViewMechanics;
+    private JButton butSupViewCashiers;
+    private JButton butSupViewJanitors;
+    private JComboBox comboBoxTaxis;
+    private JButton butReqSubmit;
+    private JLabel lblAvailableTaxis;
+    private JLabel lblContactInfo;
+    private JLabel lblConPhone;
+    private JLabel lblConEmail;
+    private JLabel lblConComplaint;
+    private JTextArea txtAreaComplaintText;
+    private JButton butConSubmitComplaint;
+    private JButton butAdminDeleteVehicle;
+    private JButton butAdminAddEmployee;
+    private JButton butAdminDeleteEmployee;
+    private JButton butAdminAddVehicle;
+    private JLabel lblAdminVehicle;
+    private JLabel lblAdminEmployee;
 
     public Bus_Boys() {
         //Initially set all panels invisible except home.
@@ -73,7 +100,9 @@ public class Bus_Boys {
         butHomeRoutes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO query route info
                 //TODO create routes dialog window
+                JOptionPane.showMessageDialog(null, "Route Info");
             }
         });
         butHomeRequests.addActionListener(new ActionListener() {
@@ -100,12 +129,60 @@ public class Bus_Boys {
             }
         });
 
+        //TODO query available taxi list
+        //TODO create loop to add taxi list to comboBoxTaxis like below.
+        comboBoxTaxis.addItem("Taxi 1");
+        comboBoxTaxis.addItem("Taxi 2");
+        comboBoxTaxis.addItem("Taxi 3");
+        comboBoxTaxis.addItem("Taxi 4");
+        comboBoxTaxis.setSelectedIndex(0);
+        //TODO add action listener to combo box list
+
+        butReqSubmit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO add submit functionality?
+                JOptionPane.showMessageDialog(null, "Request Submitted.");
+                panRequests.setVisible(false);
+                panHome.setVisible(true);
+            }
+        });
+
+
         //-----Login Panel Listeners-------------------------------------------------------------
-        butLogHome.addActionListener(new ActionListener() {
+        butLogHome.addActionListener(new ActionListener() { //Home Button
             @Override
             public void actionPerformed(ActionEvent e) {
                 panLogin.setVisible(false);
                 panHome.setVisible(true);
+            }
+        });
+        butLoginEmployee.addActionListener(new ActionListener() { //Employee Login Button
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO authentication
+                //TODO query employee info
+                //TODO employee info dialog window
+                JOptionPane.showMessageDialog(null,"Employee Info");
+            }
+        });
+        butLoginSupervisor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO authentication
+                //TODO query station #
+                //TODO query station name
+                //TODO query total # of employees
+                panLogin.setVisible(false);
+                panSupervisor.setVisible(true);
+
+            }
+        });
+        butLoginAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panLogin.setVisible(false);
+                panAdmin.setVisible(true);
             }
         });
 
@@ -117,11 +194,55 @@ public class Bus_Boys {
                 panHome.setVisible(true);
             }
         });
-
-        //-----Contact Panel Listeners--------------------------------------------------------------
-        butConHome.addActionListener(new ActionListener() {
+        butSupViewBuses.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO query buses supervised
+                JOptionPane.showMessageDialog(null,"Buses Supervised");
+            }
+        });
+        butSupViewDrivers.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO query drivers supervised
+                JOptionPane.showMessageDialog(null, "Drivers Supervised");
+            }
+        });
+        butSupViewMechanics.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO query mechanics supervised
+                JOptionPane.showMessageDialog(null, "Mechanics Supervised");
+            }
+        });
+        butSupViewCashiers.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO query cashiers supervised
+                JOptionPane.showMessageDialog(null,"Cashiers Supervised");
+            }
+        });
+        butSupViewJanitors.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO query janitors supervised
+                JOptionPane.showMessageDialog(null,"Janitors Supervised");
+            }
+        });
+
+        //-----Contact Panel Listeners--------------------------------------------------------------
+        butConHome.addActionListener(new ActionListener() { //home button
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panContact.setVisible(false);
+                panHome.setVisible(true);
+            }
+        });
+        butConSubmitComplaint.addActionListener(new ActionListener() { //complaint button
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO submit complaint functionality, update query?
+                JOptionPane.showMessageDialog(null,"Complaint Submitted");
                 panContact.setVisible(false);
                 panHome.setVisible(true);
             }
@@ -135,10 +256,41 @@ public class Bus_Boys {
                 panHome.setVisible(true);
             }
         });
+
+        butAdminAddVehicle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO add vehicle functionality
+                //TODO query
+                JOptionPane.showMessageDialog(null,"Add Vehicle");
+            }
+        });
+        butAdminDeleteVehicle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO delete vehicle functionality
+                //TODO delete query
+                JOptionPane.showMessageDialog(null,"Delete Vehicle");
+
+            }
+        });
+        butAdminAddEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO add employee functionality
+                //TODO add employee query
+                JOptionPane.showMessageDialog(null,"Add Employee");
+            }
+        });
+        butAdminDeleteEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO delete employee functionality
+                //TODO delete employee query
+                JOptionPane.showMessageDialog(null,"Delete Employee");
+            }
+        });
     }
-
-
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Bus_Boys");
