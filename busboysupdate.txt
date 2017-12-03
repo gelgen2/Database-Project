@@ -1,0 +1,113 @@
+//Insert into top: 
+
+public static boolean isNumeric(String str)
+    {
+        try
+        {
+            double d = Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
+    }
+
+
+
+//Replace admin listeners: 
+
+//-----Admin Panel Listeners---------------------------------------------------------------
+        butAdmHome.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panAdmin.setVisible(false);
+                panHome.setVisible(true);
+            }
+        });
+        butAdminAddVehicle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean showError = false;
+                String inMake = null, inModel = null, inVIN = null, inStryear = null;
+                int inYear = 0;
+                do {
+                    if (showError) JOptionPane.showMessageDialog(null, "Please enter all vehicle info.");
+                    showError = true;
+                    inMake = null; inModel = null; inVIN = null; inStryear = null;
+                    inYear = 0;
+                    inMake = JOptionPane.showInputDialog("Enter Vehicle Make:");
+                    inModel = JOptionPane.showInputDialog("Enter Vehicle Model:");
+                    inStryear = JOptionPane.showInputDialog("Enter Year:");
+                    if (isNumeric(inStryear) && inStryear != null) {
+                        inYear = Integer.parseInt(inStryear);
+                    }
+                    inVIN = JOptionPane.showInputDialog("Enter VIN:");
+                    if (inMake != null && inModel !=null && inYear != 0 && inVIN != null)
+                    {
+                        showError = false; //to control whether loop should continue
+                    }
+                } while (showError);
+                //TODO query add vehicle
+                JOptionPane.showMessageDialog(null, "Vehicle Added");
+            }
+        });
+        butAdminDeleteVehicle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String VIN = JOptionPane.showInputDialog("Enter the VIN of Vehicle to delete:");
+                //TODO query VIN, return error if does not exist
+                //TODO delete query
+                JOptionPane.showMessageDialog(null, "Vehicle Deleted");
+            }
+        });
+        butAdminAddEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean showError = false;
+                String inStrYearsWorked = null, inEmployeeID = null, inFname = null, inLname = null, inStrWage = null;
+                String inAddress = null, inSupervisorID = null, inStationID = null;
+                int inYearsWorked = 0;
+                double inWage = 0;
+                do {
+                    inStrYearsWorked = null; inEmployeeID = null; inFname = null; inLname = null; inStrWage = null;
+                    inAddress = null; inSupervisorID = null; inStationID = null;
+                    inYearsWorked = 0; inWage = 0;
+                    if (showError) JOptionPane.showMessageDialog(null, "Please enter all employee info.");
+                    showError = true;
+                    inStrYearsWorked = JOptionPane.showInputDialog("Enter the number of years worked:");
+                    if (isNumeric(inStrYearsWorked) && inStrYearsWorked != null)
+                    {
+                        inYearsWorked = Integer.parseInt(inStrYearsWorked);
+                    }
+                    inEmployeeID = JOptionPane.showInputDialog("Enter the employee's ID");
+                    inFname = JOptionPane.showInputDialog("Enter the employee's first name:");
+                    inLname = JOptionPane.showInputDialog("Enter the employee's lame name:");
+                    inStrWage = JOptionPane.showInputDialog("Enter the employee's wage");
+                    if (isNumeric(inStrWage) && inStrWage != null)
+                    {
+                        inWage = Double.parseDouble(inStrWage);
+                    }
+                    inAddress = JOptionPane.showInputDialog("Enter the employee's address:");
+                    inSupervisorID = JOptionPane.showInputDialog("Enter the ID of the employee's supervisor:");
+                    inStationID = JOptionPane.showInputDialog("Enter the ID of the station the employee works at:");
+                    if (inStrYearsWorked != null && inEmployeeID != null && inFname != null && inLname != null && inWage != 0
+                            && inAddress != null && inSupervisorID != null && inStationID != null)
+                    {
+                        showError = false; //To control whether loop should continue
+                    }
+                } while (showError);
+                //TODO query add employee
+                JOptionPane.showMessageDialog(null, "Employee Added.");
+            }
+        });
+        butAdminDeleteEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String employeeID = JOptionPane.showInputDialog("Enter the ID of the Employee to delete:");
+                //TODO check whether employee ID exsists in database
+                //TODO delete employee query
+                JOptionPane.showMessageDialog(null,"Employee Deleted.");
+            }
+        });
